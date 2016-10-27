@@ -7,6 +7,6 @@ void Main()
 	auto game = make_shared<Game>();
 
 	while (System::Update()){
-		
+		game->update();
 	}
 }

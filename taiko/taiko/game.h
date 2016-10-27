@@ -2,24 +2,25 @@
 
 # include "common.h"
 
-class Music;
+//class Music;
 
 class Game {
 public:
 
 	//ゲームの状態を管理たぶんログイン画面とか追加します
 	enum State {
-		START,
+		TYTLE,
+		SONGSELECT,
 		GAME,
-		SCORE,
+		RESULT,
 	};
 
 	//こんすとらくたー
 	Game();
 	void update();
-	void draw();
+	//void draw();
 
 private:
-	shared_ptr<Music> music;
+	//shared_ptr<Music> music;
 	State state;
 };
