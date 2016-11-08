@@ -168,6 +168,7 @@
     <ClCompile Include="note.cpp" />
     <ClCompile Include="result.cpp" />
     <ClCompile Include="songselect.cpp" />
+    <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
@@ -288,6 +289,7 @@
     <ClInclude Include="note.h" />
     <ClInclude Include="result.h" />
     <ClInclude Include="songselect.h" />
+    <ClInclude Include="Title.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

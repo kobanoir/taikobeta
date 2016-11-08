@@ -1,4 +1,5 @@
 # include "game.h"
+#include "Title.h"
 
 Game::Game() {
 	//ステートをスタート画面にして初期化
@@ -40,6 +41,23 @@ void Game::update() {
 			state = State::SONGSELECT;
 		}
 		font(L"りざると").draw();
+		break;
+	}
+}
+
+void Game::draw() {
+	static Font font(40);
+	switch (state) {
+	case State::TYTLE:
+		font(L"仮タイトル的な").draw(350, 150);
+		Title->draw();
+		break;
+	case State::SONGSELECT:
+		font(L"楽曲選択").draw(50, 50);
+		break;
+	case State::GAME:
+		break;
+	case State::RESULT:
 		break;
 	}
 }

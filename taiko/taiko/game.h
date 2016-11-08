@@ -18,7 +18,7 @@ public:
 	//Ç±ÇÒÇ∑Ç∆ÇÁÇ≠ÇΩÅ[
 	Game();
 	void update();
-	//void draw();
+	void draw();
 
 private:
 	//shared_ptr<Music> music;
