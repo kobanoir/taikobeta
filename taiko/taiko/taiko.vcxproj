@@ -165,6 +165,7 @@
     <ClCompile Include="account.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Music.cpp" />
     <ClCompile Include="note.cpp" />
     <ClCompile Include="result.cpp" />
     <ClCompile Include="songselect.cpp" />
@@ -286,6 +287,7 @@
     <ClInclude Include="account.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="Music.h" />
     <ClInclude Include="note.h" />
     <ClInclude Include="result.h" />
     <ClInclude Include="songselect.h" />

@@ -4,6 +4,7 @@
 Game::Game() {
 	//ステートをスタート画面にして初期化
 	state = State::TYTLE;
+	title = make_shared<Title>();
 	//music = make_shared<Music>();
 }
 
@@ -16,7 +17,6 @@ void Game::update() {
 		if (Input::KeySpace.clicked) {
 			state = State::SONGSELECT;
 		}
-		font(L"たいとる").draw();
 		break;
 	case State::SONGSELECT:
 		if (Input::KeyEnter.clicked) {
@@ -50,12 +50,14 @@ void Game::draw() {
 	switch (state) {
 	case State::TYTLE:
 		font(L"仮タイトル的な").draw(350, 150);
-		Title->draw();
+		title->draw();
 		break;
 	case State::SONGSELECT:
 		font(L"楽曲選択").draw(50, 50);
 		break;
 	case State::GAME:
+		Line(0, 240, 1080, 240).draw();
+		Line(0, 360, 1080, 360).draw();
 		break;
 	case State::RESULT:
 		break;

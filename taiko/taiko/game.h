@@ -3,6 +3,7 @@
 # include "common.h"
 
 //class Music;
+class Title;
 
 class Game {
 public:
@@ -23,4 +24,5 @@ public:
 private:
 	//shared_ptr<Music> music;
 	State state;
+	shared_ptr<Title> title;
 };

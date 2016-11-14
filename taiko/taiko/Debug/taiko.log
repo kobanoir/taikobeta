@@ -1,7 +1,3 @@
-﻿cl : コマンド ライン warning D9030: '/Gm' はマルチプロセシングと互換性がありません。/MP スイッチを無視します
-  game.cpp
-c:\users\c-koba\desktop\taikobeta\taiko\taiko\game.cpp(53): error C2065: 'title': 定義されていない識別子です。
-c:\users\c-koba\desktop\taikobeta\taiko\taiko\game.cpp(53): error C2227: '->draw' : 左側がクラス、構造体、共用体、ジェネリック型へのポインターではありません。
-  c:\users\c-koba\desktop\taikobeta\taiko\taiko\game.cpp(53): note: 型は 'unknown-type' です。
-  Title.cpp
-  コードを生成中...
+﻿  game.cpp
+  taiko.vcxproj -> C:\Users\c-koba\Desktop\taikobeta\taiko\Debug\taiko.exe
+  taiko.vcxproj -> C:\Users\c-koba\Desktop\taikobeta\taiko\Debug\taiko.pdb (Full PDB)
