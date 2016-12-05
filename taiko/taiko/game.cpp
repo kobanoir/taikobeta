@@ -25,7 +25,6 @@ void Game::update() {
 		if (Input::KeyQ.clicked) {
 			state = State::TYTLE;
 		}
-		font(L"せんきょく").draw();
 		break;
 	case State::GAME:
 		if (Input::KeySpace.clicked) {
@@ -34,19 +33,19 @@ void Game::update() {
 		if (Input::KeyQ.clicked) {
 			state = State::SONGSELECT;
 		}
-		font(L"ぷれいがめん").draw();
 		break;
 	case State::RESULT:
 		if (Input::KeySpace.clicked) {
 			state = State::SONGSELECT;
 		}
-		font(L"りざると").draw();
 		break;
 	}
 }
 
 void Game::draw() {
 	static Font font(40);
+	static Circle good(200, 300, 53);
+	static Circle parfect(200, 300, 32);
 	switch (state) {
 	case State::TYTLE:
 		font(L"仮タイトル的な").draw(350, 150);
@@ -58,8 +57,15 @@ void Game::draw() {
 	case State::GAME:
 		Line(0, 240, 1080, 240).draw();
 		Line(0, 360, 1080, 360).draw();
+		Line(140, 240, 140, 360).draw();
+		good.drawFrame(2, 0,Alpha(300));
+		parfect.drawFrame(2, 0, Alpha(300));
 		break;
 	case State::RESULT:
+		font(L"Score").draw(200, 150);
+		font(L"Perfect").draw(180, 400);
+		font(L"Good").draw(205, 500);
+		font(L"Miss").draw(215, 600);
 		break;
 	}
 }
