@@ -43,12 +43,15 @@ void Game::update() {
 }
 
 void Game::draw() {
+	int flag = 0;
 	static Font font(40);
+	static Font start(20);
 	static Circle good(200, 300, 53);
 	static Circle parfect(200, 300, 32);
 	switch (state) {
 	case State::TYTLE:
 		font(L"仮タイトル的な").draw(350, 150);
+		start(L"Press to space").draw(450, 350);
 		title->draw();
 		break;
 	case State::SONGSELECT:
