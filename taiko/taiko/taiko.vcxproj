@@ -167,8 +167,6 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Music.cpp" />
     <ClCompile Include="note.cpp" />
-    <ClCompile Include="result.cpp" />
-    <ClCompile Include="songselect.cpp" />
     <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>

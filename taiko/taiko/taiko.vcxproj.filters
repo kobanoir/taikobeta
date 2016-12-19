@@ -87,12 +87,6 @@
     <ClCompile Include="note.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="songselect.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="result.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="account.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
