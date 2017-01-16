@@ -162,11 +162,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="account.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Music.cpp" />
-    <ClCompile Include="note.cpp" />
+    <ClCompile Include="song_data.cpp" />
     <ClCompile Include="Title.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -282,13 +280,9 @@
     <Font Include="Example\YomogiFont.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="account.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="game.h" />
-    <ClInclude Include="Music.h" />
-    <ClInclude Include="note.h" />
-    <ClInclude Include="result.h" />
-    <ClInclude Include="songselect.h" />
+    <ClInclude Include="song_data.h" />
     <ClInclude Include="Title.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

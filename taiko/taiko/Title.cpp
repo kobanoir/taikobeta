@@ -11,7 +11,5 @@ void Title::draw(){
 	spfont(L"3").draw(820, 550);
 	spfont(L"4").draw(820, 600);
 	spfont(L"5").draw(820, 650);
-	name(L"n1doking").draw(850,445);
-	sp(L"9700").draw(1000, 445);
 
 }
