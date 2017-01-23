@@ -4,14 +4,28 @@
 
 class Song_data {
 public:
+	int find_files();
 
 private:
+	//曲名
 	string song_title;
+	//背景の壁紙
 	string wallpaper;
+	//音楽データ
 	string song;
-	string offset;
-	string BPM;
-	string songs_constant;
-	string songs_def;
+	//オフセット
+	double offset;
+	//BPM(まんま)
+	double BPM;
+	//譜面定数(sp計算に使うかも)
+	double songs_constant;
+	//難易度(1～10)
+	int songs_def;
+	//譜面の中身
 	vector<string> note;
+	//ファイル走査に使う
+	HANDLE hFind;
+	WIN32_FIND_DATA fd;
+	LPCWSTR
+
 };
