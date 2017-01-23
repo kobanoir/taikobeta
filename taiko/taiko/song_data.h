@@ -7,6 +7,7 @@ public:
 	int find_files();
 
 private:
+	string file_name;
 	//曲名
 	string song_title;
 	//背景の壁紙
@@ -26,6 +27,5 @@ private:
 	//ファイル走査に使う
 	HANDLE hFind;
 	WIN32_FIND_DATA fd;
-	LPCWSTR
 
 };

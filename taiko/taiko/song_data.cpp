@@ -2,12 +2,16 @@
 
 
 int Song_data::find_files() {
-	string file = "\\taikobeta\\taiko\\taiko\\Songs\\*.*";
+	string file = "Songs\\*.*";
 	hFind = FindFirstFile(file.c_str(), &fd);
+	file_name = fd.cFileName;
 	if (hFind == INVALID_HANDLE_VALUE) {
-		return 114514;
+		return -1;
 	}
-	else {
-		return 1919;
+
+	if (file_name.size() != 0) {
+		return 1;
 	}
+
+	return 3;
 }

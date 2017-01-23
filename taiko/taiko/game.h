@@ -2,7 +2,6 @@
 
 # include "common.h"
 
-//class Music;
 class Title;
 class Song_data;
 
