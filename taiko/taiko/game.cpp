@@ -72,3 +72,39 @@ void Game::draw() {
 		break;
 	}
 }
+
+void Game::find_files() {
+	//カウント用
+	int i = 0;
+	//push_back用の空のクラス
+	Song_data hoge;
+	string file = "Songs\\*.*";
+	hFind = FindFirstFile(file.c_str(), &fd);
+	songs_list.push_back(hoge);
+	if (hFind == INVALID_HANDLE_VALUE) {
+	
+	}
+	//なぞの隠しファイル？を検出するのでそれを省く用
+	if ((fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+		&& strcmp(fd.cFileName, "..") != 0 && strcmp(fd.cFileName, ".") != 0) {
+		songs_list[0].file_name = fd.cFileName;
+		i++;
+	}
+	//なぞのあれだったときリストの数が合わなくなるのでポップ
+	else {
+		songs_list.pop_back();
+	}
+
+
+	while (FindNextFile(hFind, &fd)) {
+		if ((fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+			&& strcmp(fd.cFileName, "..") != 0 && strcmp(fd.cFileName, ".") != 0) {
+			songs_list.push_back(hoge);
+			songs_list[i].file_name = fd.cFileName;
+			i++;
+		}
+	}
+	for (i = 0; i < songs_list.size(); i++) {
+		cout << songs_list[i].file_name << endl;
+	}
+}

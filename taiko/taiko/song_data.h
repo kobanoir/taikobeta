@@ -4,9 +4,7 @@
 
 class Song_data {
 public:
-	int find_files();
-
-private:
+	//もろもろのデータが入っているファイルの名前
 	string file_name;
 	//曲名
 	string song_title;
@@ -24,8 +22,5 @@ private:
 	int songs_def;
 	//譜面の中身
 	vector<string> note;
-	//ファイル走査に使う
-	HANDLE hFind;
-	WIN32_FIND_DATA fd;
 
 };

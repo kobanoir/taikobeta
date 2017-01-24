@@ -8,9 +8,7 @@ void Main()
 	
 	auto game = make_shared<Game>();
 
-	auto hoge = make_shared<Song_data>();
-
-	hoge->find_files();
+	game->find_files();
 
 	while (System::Update()){
 		game->update();
