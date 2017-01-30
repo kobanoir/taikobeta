@@ -43,7 +43,6 @@ void Game::update() {
 }
 
 void Game::draw() {
-	int flag = 0;
 	static Font font(40);
 	static Font start(20);
 	static Circle good(200, 300, 53);
@@ -55,7 +54,25 @@ void Game::draw() {
 		title->draw();
 		break;
 	case State::SONGSELECT:
+		static Rect rect(400, 300, 1000, 100);
+		static Rect rect1(500, 180, 1000, 100);
+		static Rect rect2(500, 420, 1000, 100);
+		static Rect rect3(600, 60, 1000, 100);
+		static Rect rect4(600, 540, 1000, 100);
+		static Rect rect5(700, -50, 1000, 100);
+		static Rect rect6(700, 660, 1000, 100);
 		font(L"Šy‹È‘I‘ð").draw(50, 50);
+		rect.drawFrame(3, 0);
+		rect1.drawFrame(3, 0);
+		rect2.drawFrame(3, 0);
+		rect3.drawFrame(3, 0);
+		rect4.drawFrame(3, 0);
+		rect5.drawFrame(3, 0);
+		rect6.drawFrame(3, 0);
+		font(L"hoge").draw(420,300);
+		font(L"fuga").draw(520, 180);
+		font(L"piyo").draw(520, 420);
+		//font(Widen(songs_list[0].file_name));
 		break;
 	case State::GAME:
 		Line(0, 240, 1080, 240).draw();
