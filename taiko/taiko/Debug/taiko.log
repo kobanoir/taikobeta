@@ -1,4 +1,6 @@
-﻿  game.cpp
-c:\users\c-koba\desktop\taikobeta\taiko\taiko\game.cpp(124): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-  taiko.vcxproj -> C:\Users\c-koba\Desktop\taikobeta\taiko\Debug\taiko.exe
-  taiko.vcxproj -> C:\Users\c-koba\Desktop\taikobeta\taiko\Debug\taiko.pdb (Full PDB)
+﻿  song_select.cpp
+c:\users\kobanoir\desktop\taikobeta\taiko\taiko\song_select.cpp(40): warning C4389: '==': signed と unsigned の数値を比較しようとしました。
+c:\users\kobanoir\desktop\taikobeta\taiko\taiko\song_select.cpp(51): warning C4389: '==': signed と unsigned の数値を比較しようとしました。
+c:\users\kobanoir\desktop\taikobeta\taiko\taiko\song_select.cpp(58): warning C4018: '>=': signed と unsigned の数値を比較しようとしました。
+  taiko.vcxproj -> C:\Users\kobanoir\Desktop\taikobeta\taiko\Debug\taiko.exe
+  taiko.vcxproj -> C:\Users\kobanoir\Desktop\taikobeta\taiko\Debug\taiko.pdb (Full PDB)

@@ -5,7 +5,62 @@ Game::Game() {
 	//ステートをスタート画面にして初期化
 	state = State::TYTLE;
 	title = make_shared<Title>();
-	//music = make_shared<Music>();
+}
+
+void Game::select_rayout() {
+	static Font font(40);
+	static Rect rect(400, 300, 1000, 100);
+	static Rect rect1(500, 180, 1000, 100);
+	static Rect rect2(500, 420, 1000, 100);
+	static Rect rect3(600, 60, 1000, 100);
+	static Rect rect4(600, 540, 1000, 100);
+	static Rect rect5(700, -50, 1000, 100);
+	static Rect rect6(700, 660, 1000, 100);
+	rect.drawFrame(3, 0);
+	rect1.drawFrame(3, 0);
+	rect2.drawFrame(3, 0);
+	rect3.drawFrame(3, 0);
+	rect4.drawFrame(3, 0);
+	rect5.drawFrame(3, 0);
+	rect6.drawFrame(3, 0);
+	if (Input::KeyUp.clicked) {
+		select++;
+	}
+	if (Input::KeyDown.clicked) {
+		if (select == 0) {
+			select = songs_list.size() - 1;
+		}
+		else{
+			select--;
+		}
+	}
+	if (select >= songs_list.size()) {
+		select = 0;
+	}
+	//中央描画
+	font(Widen(songs_list[select].file_name)).draw(420, 300);
+	font(select).draw(100, 100);
+	//一段下
+	if (select + 1 == songs_list.size()) {
+		font(Widen(songs_list[0].file_name)).draw(520, 420);
+	}
+	else {
+		font(Widen(songs_list[select + 1].file_name)).draw(520, 420);
+	}
+	//もう一段下
+	if (select + 2 >= songs_list.size()) {
+		font(Widen(songs_list[select - 1].file_name)).draw(620, 540);
+	}
+	else {
+		font(Widen(songs_list[select + 2].file_name)).draw(620, 540);
+	}
+	//一番下
+	if (select + 3 >= songs_list.size()) {
+		font(Widen(songs_list[select - 2].file_name)).draw(720, 660);
+	}
+	else {
+		font(Widen(songs_list[select + 2].file_name)).draw(720, 660);
+	}
 }
 
 void Game::update() {
@@ -54,25 +109,8 @@ void Game::draw() {
 		title->draw();
 		break;
 	case State::SONGSELECT:
-		static Rect rect(400, 300, 1000, 100);
-		static Rect rect1(500, 180, 1000, 100);
-		static Rect rect2(500, 420, 1000, 100);
-		static Rect rect3(600, 60, 1000, 100);
-		static Rect rect4(600, 540, 1000, 100);
-		static Rect rect5(700, -50, 1000, 100);
-		static Rect rect6(700, 660, 1000, 100);
+		sel.exe();
 		font(L"楽曲選択").draw(50, 50);
-		rect.drawFrame(3, 0);
-		rect1.drawFrame(3, 0);
-		rect2.drawFrame(3, 0);
-		rect3.drawFrame(3, 0);
-		rect4.drawFrame(3, 0);
-		rect5.drawFrame(3, 0);
-		rect6.drawFrame(3, 0);
-		font(L"hoge").draw(420,300);
-		font(L"fuga").draw(520, 180);
-		font(L"piyo").draw(520, 420);
-		//font(Widen(songs_list[0].file_name));
 		break;
 	case State::GAME:
 		Line(0, 240, 1080, 240).draw();

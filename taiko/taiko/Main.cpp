@@ -8,8 +8,6 @@ void Main()
 	
 	auto game = make_shared<Game>();
 
-	game->find_files();
-
 	while (System::Update()){
 		game->update();
 		game->draw();
