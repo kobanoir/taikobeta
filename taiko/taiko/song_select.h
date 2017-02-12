@@ -11,12 +11,12 @@ public:
 	void exe();
 	void find_files();
 	void select_rayout();
-
+	string get_title();
 private:
 	//ファイル走査に使う
 	HANDLE hFind;
 	WIN32_FIND_DATA fd;
 	int select = 0;
-	vector<Song_data> songs_list;
+	vector<string> songs_list;
 	int flag = 0;
 };

@@ -4,10 +4,6 @@
 
 class Song_data {
 public:
-	//もろもろのデータが入っているファイルの名前
-	string file_name;
-	//曲名
-	string song_title;
 	//背景の壁紙
 	string wallpaper;
 	//音楽データ

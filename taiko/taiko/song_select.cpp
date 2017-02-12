@@ -41,35 +41,35 @@ void Song_select::select_rayout() {
 		}
 	}
 	//中央描画
- 	font(Widen(songs_list[select].file_name)).draw(420, 300);
+ 	font(Widen(songs_list[select])).draw(420, 300);
 	font(select).draw(100, 100);
 	//一段下
  	if (select + 1 == songs_list.size()) {
-		font(Widen(songs_list[0].file_name)).draw(520, 420);
+		font(Widen(songs_list[0])).draw(520, 420);
 	}
 	else {
-		font(Widen(songs_list[select + 1].file_name)).draw(520, 420);
+		font(Widen(songs_list[select + 1])).draw(520, 420);
 	}
 	//もう一段下
 	if (select + 2 >= songs_list.size()) {
-		font(Widen(songs_list[select + 2 - songs_list.size()].file_name)).draw(620, 540);
+		font(Widen(songs_list[select + 2 - songs_list.size()])).draw(620, 540);
 	}
 	else {
-		font(Widen(songs_list[select + 2].file_name)).draw(620, 540);
+		font(Widen(songs_list[select + 2])).draw(620, 540);
 	}
 	//一つ上
 	if (select == 0) {
-		font(Widen(songs_list[songs_list.size() - 1].file_name)).draw(520, 180);
+		font(Widen(songs_list[songs_list.size() - 1])).draw(520, 180);
 	}
 	else {
-		font(Widen(songs_list[select - 1].file_name)).draw(520, 180);
+		font(Widen(songs_list[select - 1])).draw(520, 180);
 	}
 	//もいっこ上
 	if (select <= 1) {
-		font(Widen(songs_list[songs_list.size() - 2 + select].file_name)).draw(620, 60);
+		font(Widen(songs_list[songs_list.size() - 2 + select])).draw(620, 60);
 	}
 	else {
-		font(Widen(songs_list[select - 2].file_name)).draw(620, 60);
+		font(Widen(songs_list[select - 2])).draw(620, 60);
 	}
 }
 
@@ -77,7 +77,7 @@ void Song_select::find_files() {
 	//カウント用
 	int i = 0;
 	//push_back用の空のクラス
-	Song_data hoge;
+	string hoge;
 	string file = "Songs\\*.*";
 	hFind = FindFirstFile(file.c_str(), &fd);
 	songs_list.push_back(hoge);
@@ -87,7 +87,7 @@ void Song_select::find_files() {
 	//なぞの隠しファイル？を検出するのでそれを省く用
 	if ((fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 		&& strcmp(fd.cFileName, "..") != 0 && strcmp(fd.cFileName, ".") != 0) {
-		songs_list[0].file_name = fd.cFileName;
+		songs_list[0] = fd.cFileName;
 		i++;
 	}
 	//なぞのあれだったときリストの数が合わなくなるのでポップ
@@ -100,8 +100,12 @@ void Song_select::find_files() {
 		if ((fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 			&& strcmp(fd.cFileName, "..") != 0 && strcmp(fd.cFileName, ".") != 0) {
 			songs_list.push_back(hoge);
-			songs_list[i].file_name = fd.cFileName;
+			songs_list[i] = fd.cFileName;
 			i++;
 		}
 	}
+}
+
+string Song_select::get_title() {
+	return songs_list[select];
 }

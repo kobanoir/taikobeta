@@ -3,9 +3,11 @@
 # include "common.h"
 # include "song_data.h"
 # include "song_select.h"
+# include "Body.h"
 
 class Title;
 class Song_data;
+class Body;
 class Song_select;
 
 class Game {
@@ -23,17 +25,11 @@ public:
 	Game();
 	void update();
 	void draw();
-	void find_files();
-	void select_rayout();
 
 private:
 	//shared_ptr<Music> music;
 	State state;
 	shared_ptr<Title> title;
-	//ファイル走査に使う
-	HANDLE hFind;
-	WIN32_FIND_DATA fd;
-	int select = 0;
-	vector<Song_data> songs_list;
+	Body exe;
 	Song_select sel;
 };
