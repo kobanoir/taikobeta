@@ -5,16 +5,19 @@ void Body::exe() {
 		point = 0;
 		combo = 0;
 		scroll = 0;
-		onef = 60 / (note.BPM / 60);
+		//1Fの間に流れてくる4分音符の数
+		onef = (note.BPM / 60) / 60;
 		flag = 1;
 	}
 	reyout_draw();
+	stopwatch.start();
 	main_exec();
 }
 
 void Body::find_note(string title) {
 	//カウント用
 	int i = 0;
+	songtitle = title;
 	//push_back用の空のクラス
 	string hoge;
 	string empty;
@@ -35,22 +38,25 @@ void Body::find_note(string title) {
 			note.song = hoge;
 		}
 		if (i == 2) {
-			note.BPM = atof(hoge.c_str());
+			note.velume = atof(hoge.c_str());
 		}
 		if (i == 3) {
-			note.offset = atof(hoge.c_str());
+			note.BPM = atof(hoge.c_str());
 		}
 		if (i == 4) {
-			note.songs_constant = atof(hoge.c_str());
+			note.offset = atof(hoge.c_str());
 		}
 		if (i == 5) {
+			note.songs_constant = atof(hoge.c_str());
+		}
+		if (i == 6) {
 			note.songs_def = atoi(hoge.c_str());
 		}
-		if (i >= 6) {
+		if (i >= 7) {
 			note.note.push_back(empty);
 			draw_save_don.push_back(fuga);
 			draw_save_katu.push_back(fuga);
-			note.note[i - 6] = hoge;
+			note.note[i - 7] = hoge;
 		}
 		i++;
 	}
@@ -66,8 +72,8 @@ void Body::reyout_draw() {
 }
 
 void Body::main_exec() {
+	play_song();
 	note_draw();
-	judge();
 }
 
 void Body::draw_don() {
@@ -84,46 +90,43 @@ void Body::note_draw() {
 	double empty = 0;
 	for (int i = 0;i < note.note.size();i++) {
 		for (int j = 0;j < note.note[i].size();j++) {
-			draw_point = (note.offset * 60) * (100 / onef) + 200 + ((200 / (note.note[i].size() / 4)) * ((j + 1) + i * note.note[i].size())) - scroll;
+			//最初のノーツが流れてくるまでの座標 + その小節の音符の数からノーツの間隔を出す
+			draw_point = (220 * ((note.offset * 60) / (1 / onef))) + ((220 / (note.note[i].size() / 4))
+				* ((j + 1) + i * note.note[i].size())) - scroll;
 			draw_save_don[i].push_back(empty);
 			draw_save_katu[i].push_back(empty);
 			if (note.note[i][j] == '0') {/*何もしない*/}
 			else if (note.note[i][j] == '1' && draw_point >=140) {
 				draw_don();
-				draw_save_don[i][j] == draw_point;
 			}
 			else if (note.note[i][j] == '2' && draw_point >= 140) {
 				draw_katu();
-				draw_save_katu[i][j] == draw_point;
 			}
 		}
 	}
-	scroll += 8;
+	scroll += 220 / (1 / onef);
 }
 
-void Body::judge() {
+void Body::play_song() {
+	static Font font(40);
+	string song;
+	song += "Songs\\";
+	song += songtitle;
+	song += "\\";
+	song += note.song;
+	static Sound bgm(Widen(song));
+	static Sound don(L"Sound_Effect\\dong.wav");
+	static Sound katu(L"Sound_Effect\\ka.wav");
+	if (stopwatch.ms() >= note.offset * 1000) {
+		bgm.setVolume(note.velume);
+		bgm.play();
+	}
 	if (Input::KeyS.clicked || Input::KeyK.clicked) {
-		for (int i = 0;i < note.note.size();i++) {
-			for (int j = 0;j < note.note[i].size();j++) {
-				if (draw_save_don[i][j] - 32 <= 252 || draw_save_don[i][j] + 32 >= 198) {
-					point += 500;
-				}
-				else if (draw_save_don[i][j] - 53 <= 283 || draw_save_don[i][j] + 53 >= 177) {
-					point += 300;
-				}
-			}
-		}
+		don.stop();
+		don.play();
 	}
 	if (Input::KeyA.clicked || Input::KeyL.clicked) {
-		for (int i = 0;i < note.note.size();i++) {
-			for (int j = 0;j < note.note[i].size();j++) {
-				if (draw_save_katu[i][j] - 32 <= 252 || draw_save_katu[i][j] + 32 >= 198) {
-					point += 500;
-				}
-				else if (draw_save_katu[i][j] - 53 <= 283 || draw_save_katu[i][j] + 53 >= 177) {
-					point += 300;
-				}
-			}
-		}
+		katu.stop();
+		katu.play();
 	}
 }

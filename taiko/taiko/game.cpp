@@ -28,9 +28,6 @@ void Game::update() {
 		break;
 	case State::GAME:
 		exe.exe();
-		if (Input::KeyQ.clicked) {
-			state = State::SONGSELECT;
-		}
 		break;
 	case State::RESULT:
 		if (Input::KeySpace.clicked) {

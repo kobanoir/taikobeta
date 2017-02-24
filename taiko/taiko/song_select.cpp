@@ -95,7 +95,6 @@ void Song_select::find_files() {
 		songs_list.pop_back();
 	}
 
-
 	while (FindNextFile(hFind, &fd)) {
 		if ((fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 			&& strcmp(fd.cFileName, "..") != 0 && strcmp(fd.cFileName, ".") != 0) {

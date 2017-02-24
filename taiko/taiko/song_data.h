@@ -8,6 +8,8 @@ public:
 	string wallpaper;
 	//音楽データ
 	string song;
+	//音量
+	double velume;
 	//オフセット
 	double offset;
 	//BPM(まんま)
