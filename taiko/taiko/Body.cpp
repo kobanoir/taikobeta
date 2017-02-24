@@ -101,8 +101,8 @@ void Body::note_draw() {
 	for (int i = 0;i < note.note.size();i++) {
 		for (int j = 0;j < note.note[i].size();j++) {
 			//Å‰‚Ìƒm[ƒc‚ª—¬‚ê‚Ä‚­‚é‚Ü‚Å‚ÌÀ•W + ‚»‚Ì¬ß‚Ì‰¹•„‚Ì”‚©‚çƒm[ƒc‚ÌŠÔŠu‚ðo‚·
-			draw_point = (220 * ((note.offset * 60) / (1 / onef))) + ((220 / (note.note[i].size() / 4))
-				* ((j + 1) + i * note.note[i].size())) - scroll;
+				draw_point = (220 * ((note.offset * 60) / (1 / onef))) + ((220 / (note.note[i].size() / 4))
+					* (j + i * note.note[i].size())) - scroll;
 			draw_save_don[i].push_back(empty);
 			draw_save_katu[i].push_back(empty);
 			if (note.note[i][j] == '0') {/*‰½‚à‚µ‚È‚¢*/}
