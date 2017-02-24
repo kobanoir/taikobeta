@@ -23,6 +23,9 @@ public:
 
 	void play_song();
 
+	void draw_bigkatu();
+
+	void draw_bigdon();
 private:
 	Song_data note;
 	string songtitle;

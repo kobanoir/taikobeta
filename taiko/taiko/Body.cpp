@@ -86,6 +86,16 @@ void Body::draw_katu() {
 
 }
 
+void Body::draw_bigdon() {
+	Circle(draw_point, 300, 53).draw();
+	Circle(draw_point, 300, 48).draw(Color(237, 68, 46));
+}
+
+void Body::draw_bigkatu() {
+	Circle(draw_point, 300, 53).draw();
+	Circle(draw_point, 300, 48).draw(Color(68, 141, 173));
+}
+
 void Body::note_draw() {
 	double empty = 0;
 	for (int i = 0;i < note.note.size();i++) {
@@ -101,6 +111,12 @@ void Body::note_draw() {
 			}
 			else if (note.note[i][j] == '2' && draw_point >= 140) {
 				draw_katu();
+			}
+			else if (note.note[i][j] == '3' && draw_point >= 140) {
+				draw_bigdon();
+			}
+			else if (note.note[i][j] == '4' && draw_point >= 140) {
+				draw_bigkatu();
 			}
 		}
 	}
