@@ -18,9 +18,9 @@ void Game::update() {
 		}
 		break;
 	case State::SONGSELECT:
-		exe.find_note(sel.get_title());
 		if (Input::KeyEnter.clicked) {
 			state = State::GAME;
+			exe.find_note(sel.get_title());
 		}
 		if (Input::KeyQ.clicked) {
 			state = State::TYTLE;

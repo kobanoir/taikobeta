@@ -8,9 +8,9 @@ void Body::exe() {
 		//1Fの間に流れてくる4分音符の数
 		onef = (note.BPM / 60) / 60;
 		flag = 1;
+		diff = 0;
 	}
 	reyout_draw();
-	stopwatch.start();
 	main_exec();
 }
 
@@ -54,8 +54,6 @@ void Body::find_note(string title) {
 		}
 		if (i >= 7) {
 			note.note.push_back(empty);
-			draw_save_don.push_back(fuga);
-			draw_save_katu.push_back(fuga);
 			note.note[i - 7] = hoge;
 		}
 		i++;
@@ -72,8 +70,18 @@ void Body::reyout_draw() {
 }
 
 void Body::main_exec() {
-	play_song();
-	note_draw();
+	static Font psk(10);
+	if (Input::KeySpace.clicked) {
+		play = 1;
+	}
+
+	if (play == 1) {
+		play_song();
+		note_draw();
+	}
+	else {
+		psk(L"prass space key").draw(300, 290);
+	}
 }
 
 void Body::draw_don() {
@@ -97,52 +105,45 @@ void Body::draw_bigkatu() {
 }
 
 void Body::note_draw() {
-	double empty = 0;
+	//オフセット代入
+	draw_point = (220 * ((note.offset * 60) / (1 / onef)));
 	for (int i = 0;i < note.note.size();i++) {
 		for (int j = 0;j < note.note[i].size();j++) {
-			//最初のノーツが流れてくるまでの座標 + その小節の音符の数からノーツの間隔を出す
-			draw_point = (220 * ((note.offset * 60) / (1 / onef))) + ((220 / (note.note[i].size() / 4))
-				* ((j + 1) + i * note.note[i].size())) - scroll;
-			draw_save_don[i].push_back(empty);
-			draw_save_katu[i].push_back(empty);
+			//時間を取得
+			double time = stopwatch.ms();
+			//前回との差分を求める最初の値は0
+			diff = time - diff;
+			//理論値(1F=0.0166666)との誤差率を求める
+			error_rate = (1 / 60) / diff;
 			if (note.note[i][j] == '0') {/*何もしない*/}
-			else if (note.note[i][j] == '1' && draw_point >=140) {
+			else if (note.note[i][j] == '1' && draw_point >=140 + 32) {
 				draw_don();
 			}
-			else if (note.note[i][j] == '2' && draw_point >= 140) {
+			else if (note.note[i][j] == '2' && draw_point >= 140 + 32) {
 				draw_katu();
 			}
-			else if (note.note[i][j] == '3' && draw_point >= 140) {
+			else if (note.note[i][j] == '3' && draw_point >= 140 + 53) {
 				draw_bigdon();
 			}
-			else if (note.note[i][j] == '4' && draw_point >= 140) {
+			else if (note.note[i][j] == '4' && draw_point >= 140 + 53) {
 				draw_bigkatu();
 			}
+			draw_point += (880 / note.note[i].size()) * time / 60 + scroll;
 		}
 	}
 	scroll += 220 / (1 / onef);
 }
 
 void Body::play_song() {
-	static Font font(40);
 	string song;
 	song += "Songs\\";
 	song += songtitle;
 	song += "\\";
 	song += note.song;
 	static Sound bgm(Widen(song));
-	static Sound don(L"Sound_Effect\\dong.wav");
-	static Sound katu(L"Sound_Effect\\ka.wav");
 	if (stopwatch.ms() >= note.offset * 1000) {
 		bgm.setVolume(note.velume);
 		bgm.play();
 	}
-	if (Input::KeyS.clicked || Input::KeyK.clicked) {
-		don.stop();
-		don.play();
-	}
-	if (Input::KeyA.clicked || Input::KeyL.clicked) {
-		katu.stop();
-		katu.play();
-	}
 }
+

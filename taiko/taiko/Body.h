@@ -29,13 +29,14 @@ public:
 private:
 	Song_data note;
 	string songtitle;
+	int diff;
 	int point;
 	int combo;
+	double error_rate;
 	double draw_point;
 	double onef;
 	int flag;
+	int play;
 	double scroll;
 	Stopwatch stopwatch;
-	vector<vector<double>> draw_save_don;
-	vector<vector<double>> draw_save_katu;
 };
