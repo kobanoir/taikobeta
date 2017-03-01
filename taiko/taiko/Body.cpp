@@ -109,12 +109,20 @@ void Body::note_draw() {
 	draw_point = (220 * ((note.offset * 60) / (1 / onef)));
 	for (int i = 0;i < note.note.size();i++) {
 		for (int j = 0;j < note.note[i].size();j++) {
+<<<<<<< HEAD
 			//時間を取得
 			double time = stopwatch.ms();
 			//前回との差分を求める最初の値は0
 			diff = time - diff;
 			//理論値(1F=0.0166666)との誤差率を求める
 			error_rate = (1 / 60) / diff;
+=======
+			//最初のノーツが流れてくるまでの座標 + その小節の音符の数からノーツの間隔を出す
+				draw_point = (220 * ((note.offset * 60) / (1 / onef))) + ((220 / (note.note[i].size() / 4))
+					* (j + i * note.note[i].size())) - scroll;
+			draw_save_don[i].push_back(empty);
+			draw_save_katu[i].push_back(empty);
+>>>>>>> origin/master
 			if (note.note[i][j] == '0') {/*何もしない*/}
 			else if (note.note[i][j] == '1' && draw_point >=140 + 32) {
 				draw_don();
