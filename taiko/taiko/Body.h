@@ -2,8 +2,12 @@
 
 #include "common.h"
 #include "song_data.h"
+#include "note_don.h"
+#include "note_katu.h"
 
 class Song_data;
+class Don;
+class Katu;
 
 class Body {
 public:
@@ -15,19 +19,15 @@ public:
 
 	void main_exec();
 
-	void draw_don();
-
-	void draw_katu();
-
 	void note_draw();
 
 	void play_song();
-
-	void draw_bigkatu();
-
-	void draw_bigdon();
 private:
+	/*---------‘åŽ–----------*/
 	Song_data note;
+	vector<Don> data_don;
+	vector<Katu> data_katu;
+	/*----------‚»‚Ì‘¼--------*/
 	string songtitle;
 	int diff;
 	int point;

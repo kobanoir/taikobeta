@@ -6,7 +6,7 @@ void Body::exe() {
 		combo = 0;
 		scroll = 0;
 		//1Fの間に流れてくる4分音符の数
-		onef = (note.BPM / 60) / 60;
+		onef = 60 / (note.BPM / 60);
 		flag = 1;
 		diff = 0;
 	}
@@ -72,74 +72,58 @@ void Body::reyout_draw() {
 void Body::main_exec() {
 	static Font psk(10);
 	if (Input::KeySpace.clicked) {
+		//ノーツを表示するための下準備:配列にpush_backしていく
+		note_draw();
 		play = 1;
 	}
 
 	if (play == 1) {
 		play_song();
-		note_draw();
 	}
 	else {
 		psk(L"prass space key").draw(300, 290);
 	}
 }
 
-void Body::draw_don() {
-	Circle(draw_point, 300, 32).draw();
-	Circle(draw_point, 300, 28).draw(Color(237, 68, 46));
-}
-void Body::draw_katu() {
-	Circle(draw_point, 300, 32).draw();
-	Circle(draw_point, 300, 28).draw(Color(68, 141, 173));
-
-}
-
-void Body::draw_bigdon() {
-	Circle(draw_point, 300, 53).draw();
-	Circle(draw_point, 300, 48).draw(Color(237, 68, 46));
-}
-
-void Body::draw_bigkatu() {
-	Circle(draw_point, 300, 53).draw();
-	Circle(draw_point, 300, 48).draw(Color(68, 141, 173));
-}
-
 void Body::note_draw() {
-	//オフセット代入
-	draw_point = (220 * ((note.offset * 60) / (1 / onef)));
+	//この下の話は全部理論値
+	//1秒あたりに流れてくるノート数
+	draw_point = note.BPM / 60;
+	//1つのノートがくるまでにかかる間隔
+	draw_point = 60 / draw_point;
+	//1Fあたりいくつ進むか
+	draw_point = 220 / draw_point;
+	//スクロールに保存
+	scroll = draw_point;
+	//offsetはsなのでfに直す
+	draw_point *= (note.offset * 60);
 	for (int i = 0;i < note.note.size();i++) {
 		for (int j = 0;j < note.note[i].size();j++) {
-<<<<<<< HEAD
-			//時間を取得
+			/*//時間を取得
 			double time = stopwatch.ms();
 			//前回との差分を求める最初の値は0
 			diff = time - diff;
 			//理論値(1F=0.0166666)との誤差率を求める
-			error_rate = (1 / 60) / diff;
-=======
-			//最初のノーツが流れてくるまでの座標 + その小節の音符の数からノーツの間隔を出す
-				draw_point = (220 * ((note.offset * 60) / (1 / onef))) + ((220 / (note.note[i].size() / 4))
-					* (j + i * note.note[i].size())) - scroll;
-			draw_save_don[i].push_back(empty);
-			draw_save_katu[i].push_back(empty);
->>>>>>> origin/master
+			error_rate = (1 / 60) / diff;*/
 			if (note.note[i][j] == '0') {/*何もしない*/}
 			else if (note.note[i][j] == '1' && draw_point >=140 + 32) {
-				draw_don();
+				//コンストラクタに座標を渡して入れておく
+				//大音符かどうかも渡すbigだったらtrue
+				data_don.push_back(Don(draw_point,false));
 			}
 			else if (note.note[i][j] == '2' && draw_point >= 140 + 32) {
-				draw_katu();
+				data_katu.push_back(Katu(draw_point, false));
 			}
 			else if (note.note[i][j] == '3' && draw_point >= 140 + 53) {
-				draw_bigdon();
+				data_don.push_back(Don(draw_point, true));
 			}
 			else if (note.note[i][j] == '4' && draw_point >= 140 + 53) {
-				draw_bigkatu();
+				data_katu.push_back(Katu(draw_point, true));
 			}
-			draw_point += (880 / note.note[i].size()) * time / 60 + scroll;
+			//値を増やすのは後でやる
+			draw_point += (880 / note.note[i].size());
 		}
 	}
-	scroll += 220 / (1 / onef);
 }
 
 void Body::play_song() {

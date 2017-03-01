@@ -165,6 +165,8 @@
     <ClCompile Include="Body.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="note_don.cpp" />
+    <ClCompile Include="note_katu.cpp" />
     <ClCompile Include="song_data.cpp" />
     <ClCompile Include="song_select.cpp" />
     <ClCompile Include="Title.cpp" />
@@ -285,6 +287,8 @@
     <ClInclude Include="Body.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="note_don.h" />
+    <ClInclude Include="note_katu.h" />
     <ClInclude Include="song_data.h" />
     <ClInclude Include="song_select.h" />
     <ClInclude Include="Title.h" />
