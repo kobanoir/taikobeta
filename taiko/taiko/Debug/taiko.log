@@ -1,12 +1,9 @@
-﻿cl : コマンド ライン warning D9030: '/Gm' はマルチプロセシングと互換性がありません。/MP スイッチを無視します
-  note_katu.cpp
-  note_don.cpp
-  Main.cpp
-  game.cpp
-  Body.cpp
-c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(110): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(111): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
-  コードを生成中...
-     ライブラリ C:\Users\syken-admin\Desktop\taikobeta\taiko\Debug\taiko.lib とオブジェクト C:\Users\syken-admin\Desktop\taikobeta\taiko\Debug\taiko.exp を作成中
+﻿  Body.cpp
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(108): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(109): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(130): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(137): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(178): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(182): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
   taiko.vcxproj -> C:\Users\syken-admin\Desktop\taikobeta\taiko\Debug\taiko.exe
   taiko.vcxproj -> C:\Users\syken-admin\Desktop\taikobeta\taiko\Debug\taiko.pdb (Full PDB)

@@ -22,6 +22,8 @@ public:
 	void note_draw();
 
 	void play_song();
+
+	void shed_note();
 private:
 	/*---------‘åŽ–----------*/
 	Song_data note;
@@ -29,7 +31,7 @@ private:
 	vector<Katu> data_katu;
 	/*----------‚»‚Ì‘¼--------*/
 	string songtitle;
-	int diff;
+	double diff;
 	int point;
 	int combo;
 	double error_rate;
@@ -38,5 +40,7 @@ private:
 	int flag;
 	int play;
 	double scroll;
+	double time_sto;
 	Stopwatch stopwatch;
+	int count;
 };

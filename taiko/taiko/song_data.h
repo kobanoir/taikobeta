@@ -10,8 +10,10 @@ public:
 	string song;
 	//音量
 	double velume;
-	//オフセット
-	double offset;
+	//ノーツのオフセット
+	double note_offset;
+	//曲のオフセット
+	double music_offset;
 	//BPM(まんま)
 	double BPM;
 	//譜面定数(sp計算に使うかも)
