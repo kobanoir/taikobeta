@@ -87,6 +87,7 @@ void Body::main_exec() {
 	if (play == 1) {
 		play_song();
 		shed_note();
+		judge();
 	}
 	else {
 		psk(L"prass space key").draw(300, 290);
@@ -186,5 +187,76 @@ void Body::shed_note() {
 	font(stopwatch.ms()).draw(100, 200);
 	font(count).draw(100, 100);
 	count++;
+}
+
+void Body::judge() {
+	//ƒhƒ“AƒJƒb‚Ì‰¹‚Ì“Ç‚İ‚İ
+	static Sound don(L"Sound_Effect\\dong.wav");
+	static Sound katu(L"Sound_Effect\\ka.wav");
+	if (Input::KeyS.clicked || Input::KeyL.clicked) {
+		don.stop();
+		don.play();
+		judge_don();
+	}
+	if (Input::KeySemicolon.clicked || Input::KeyA.clicked) {
+		katu.stop();
+		katu.play();
+		judge_katu();
+	}
+}
+
+void Body::judge_don() {
+	double time = stopwatch.ms();
+	//æ“ª‚Ìƒm[ƒc‚ğ’T‚·
+	int i = 0;
+	for (i = 0; i < data_don.size(); i++) {
+		//miss‚ÌÅ’x”»’è‚æ‚è’x‚©‚Á‚½‚çfalse‚É
+		if (data_don[i].hit_ms + 150.0 <= time) {
+			data_don[i].draw_canc = false;
+		}
+		//false‚È‚ç—¬‚ê‚½Œã
+		if (data_don[i].draw_canc == true) {
+			break;
+		}
+	}
+	if (data_don[i].hit_ms - 34 <= time && data_don[i].hit_ms + 34 >= time) {
+		point += 500;
+		data_don[i].draw_canc = false;
+	}
+	else if (data_don[i].hit_ms - 117 <= time && data_don[i].hit_ms + 117 >= time) {
+		point += 250;
+		data_don[i].draw_canc = false;
+	}
+	else if (data_don[i].hit_ms - 150 <= time && data_don[i].hit_ms + 150 >= time) {
+		data_don[i].draw_canc = false;
+	}
+}
+
+void Body::judge_katu() {
+	//’@‚¢‚½‚Æ‚«‚ÌŠÔæ“¾
+	double time = stopwatch.ms();
+	//æ“ª‚Ìƒm[ƒc‚ğ’T‚·
+	int i = 0;
+	for (i = 0; i < data_katu.size(); i++) {
+		//miss‚ÌÅ’x”»’è‚æ‚è’x‚©‚Á‚½‚çfalse‚É
+		if (data_katu[i].hit_ms + 150.0 <= time) {
+			data_katu[i].draw_canc = false;
+		}
+		//false‚È‚ç—¬‚ê‚½Œã
+		if (data_katu[i].draw_canc == true) {
+			break;
+		}
+	}
+	if (data_katu[i].hit_ms - 34 <= time && data_katu[i].hit_ms + 34 >= time) {
+		point += 500;
+		data_katu[i].draw_canc = false;
+	}
+	else if (data_katu[i].hit_ms - 117 <= time && data_katu[i].hit_ms + 117 >= time) {
+		point += 250;
+		data_katu[i].draw_canc = false;
+	}
+	else if (data_katu[i].hit_ms - 150 <= time && data_katu[i].hit_ms + 150 >= time) {
+		data_katu[i].draw_canc = false;
+	}
 }
 

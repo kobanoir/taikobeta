@@ -24,6 +24,12 @@ public:
 	void play_song();
 
 	void shed_note();
+
+	void judge();
+
+	void judge_don();
+
+	void judge_katu();
 private:
 	/*---------‘åŽ–----------*/
 	Song_data note;
