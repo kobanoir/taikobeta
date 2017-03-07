@@ -27,9 +27,12 @@ void Game::update() {
 		}
 		break;
 	case State::GAME:
-		exe.exe();
+		if (exe.exe()) {
+			state = State::RESULT;
+		}
 		break;
 	case State::RESULT:
+		exe.result();
 		if (Input::KeySpace.clicked) {
 			state = State::SONGSELECT;
 		}
@@ -64,6 +67,7 @@ void Game::draw() {
 		font(L"Perfect").draw(180, 400);
 		font(L"Good").draw(205, 500);
 		font(L"Miss").draw(215, 600);
+		font(L"Achievement").draw(100, 275);
 		break;
 	}
 }

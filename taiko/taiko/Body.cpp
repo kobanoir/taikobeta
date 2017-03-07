@@ -1,6 +1,6 @@
 #include "Body.h"
 
-void Body::exe() {
+bool Body::exe() {
 	if (flag != 1) {
 		point = 0;
 		combo = 0;
@@ -11,9 +11,21 @@ void Body::exe() {
 		diff = 0;
 		time_sto = 0;
 		count = 0;
+		game_end = false;
+		perfect = 0;
+		good = 0;
+		miss = 0;
+		achievement = 0;
+		view_achievement = 0;
 	}
 	reyout_draw();
 	main_exec();
+	if (game_end == true) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 void Body::find_note(string title) {
@@ -68,8 +80,11 @@ void Body::find_note(string title) {
 
 void Body::reyout_draw() {
 	static Font score(40);
+	static Font achi(30);
 	static Font com(25);
 	score(L"SCORE").draw(500,20);
+	achi(L"Achievement").draw(450, 120);
+	achi(view_achievement).draw(850, 120);
 	score(point).draw(800, 20);
 	com(combo).draw(50, 275);
 }
@@ -145,16 +160,24 @@ void Body::note_draw() {
 }
 
 void Body::play_song() {
+	static Font font(40);
 	string song;
 	song += "Songs\\";
 	song += songtitle;
 	song += "\\";
 	song += note.song;
 	static Sound bgm(Widen(song));
+	static int song_length = bgm.lengthSec();
 	if (stopwatch.ms() >= note.music_offset * 1000) {
 		bgm.setVolume(note.velume);
 		bgm.play();
 	}
+	if (song_length == stopwatch.s()) {
+		game_end = true;
+	}
+	font(perfect).draw(100, 500);
+	font(good).draw(100,600);
+	font(miss).draw(100, 700);
 }
 
 void Body::shed_note() {
@@ -190,6 +213,24 @@ void Body::shed_note() {
 }
 
 void Body::judge() {
+	double time = stopwatch.ms();
+	for (int i = 0; i < data_don.size(); i++) {
+		//missÇÃç≈íxîªíËÇÊÇËíxÇ©Ç¡ÇΩÇÁfalseÇ…
+		if (data_don[i].hit_ms + 150.0 <= time && data_don[i].draw_canc == true) {
+			combo = 0;
+			miss++;
+			data_don[i].draw_canc = false;
+		}
+	}
+
+	for (int i = 0; i < data_katu.size(); i++) {
+		//missÇÃç≈íxîªíËÇÊÇËíxÇ©Ç¡ÇΩÇÁfalseÇ…
+		if (data_katu[i].hit_ms + 150.0 <= time && data_katu[i].draw_canc == true) {
+			combo = 0;
+			miss++;
+			data_katu[i].draw_canc = false;
+		}
+	}
 	//ÉhÉìÅAÉJÉbÇÃâπÇÃì«Ç›çûÇ›
 	static Sound don(L"Sound_Effect\\dong.wav");
 	static Sound katu(L"Sound_Effect\\ka.wav");
@@ -203,6 +244,9 @@ void Body::judge() {
 		katu.play();
 		judge_katu();
 	}
+	//ÉAÉ`Å[ÉuÉÅÉìÉgÇÃåvéZ
+	achievement = (perfect + good * 0.5) / (perfect + good + miss) * 100;
+	view_achievement = achievement;
 }
 
 void Body::judge_don() {
@@ -210,25 +254,29 @@ void Body::judge_don() {
 	//êÊì™ÇÃÉmÅ[ÉcÇíTÇ∑
 	int i = 0;
 	for (i = 0; i < data_don.size(); i++) {
-		//missÇÃç≈íxîªíËÇÊÇËíxÇ©Ç¡ÇΩÇÁfalseÇ…
-		if (data_don[i].hit_ms + 150.0 <= time) {
-			data_don[i].draw_canc = false;
-		}
 		//falseÇ»ÇÁó¨ÇÍÇΩå„
 		if (data_don[i].draw_canc == true) {
 			break;
 		}
 	}
-	if (data_don[i].hit_ms - 34 <= time && data_don[i].hit_ms + 34 >= time) {
-		point += 500;
-		data_don[i].draw_canc = false;
-	}
-	else if (data_don[i].hit_ms - 117 <= time && data_don[i].hit_ms + 117 >= time) {
-		point += 250;
-		data_don[i].draw_canc = false;
-	}
-	else if (data_don[i].hit_ms - 150 <= time && data_don[i].hit_ms + 150 >= time) {
-		data_don[i].draw_canc = false;
+	if (i != data_don.size()) {
+		if (data_don[i].hit_ms - 34 <= time && data_don[i].hit_ms + 34 >= time) {
+			point += 500 + 500 / 10 * (combo / 10);
+			combo++;
+			data_don[i].draw_canc = false;
+			perfect++;
+		}
+		else if (data_don[i].hit_ms - 117 <= time && data_don[i].hit_ms + 117 >= time) {
+			point += 250 + 250 / 10 * (combo / 10);
+			combo++;
+			data_don[i].draw_canc = false;
+			good++;
+		}
+		else if (data_don[i].hit_ms - 150 <= time && data_don[i].hit_ms + 150 >= time) {
+			combo = 0;
+			data_don[i].draw_canc = false;
+			miss++;
+		}
 	}
 }
 
@@ -238,25 +286,37 @@ void Body::judge_katu() {
 	//êÊì™ÇÃÉmÅ[ÉcÇíTÇ∑
 	int i = 0;
 	for (i = 0; i < data_katu.size(); i++) {
-		//missÇÃç≈íxîªíËÇÊÇËíxÇ©Ç¡ÇΩÇÁfalseÇ…
-		if (data_katu[i].hit_ms + 150.0 <= time) {
-			data_katu[i].draw_canc = false;
-		}
 		//falseÇ»ÇÁó¨ÇÍÇΩå„
 		if (data_katu[i].draw_canc == true) {
 			break;
 		}
 	}
-	if (data_katu[i].hit_ms - 34 <= time && data_katu[i].hit_ms + 34 >= time) {
-		point += 500;
-		data_katu[i].draw_canc = false;
-	}
-	else if (data_katu[i].hit_ms - 117 <= time && data_katu[i].hit_ms + 117 >= time) {
-		point += 250;
-		data_katu[i].draw_canc = false;
-	}
-	else if (data_katu[i].hit_ms - 150 <= time && data_katu[i].hit_ms + 150 >= time) {
-		data_katu[i].draw_canc = false;
+	if (i != data_katu.size()) {
+		if (data_katu[i].hit_ms - 34 <= time && data_katu[i].hit_ms + 34 >= time) {
+			point += 500 + 500 / 10 * (combo / 10);
+			combo++;
+			data_katu[i].draw_canc = false;
+			perfect++;
+		}
+		else if (data_katu[i].hit_ms - 117 <= time && data_katu[i].hit_ms + 117 >= time) {
+			point += 250 + 250 / 10 * (combo / 10);
+			combo++;
+			data_katu[i].draw_canc = false;
+			good++;
+		}
+		else if (data_katu[i].hit_ms - 150 <= time && data_katu[i].hit_ms + 150 >= time) {
+			combo = 0;
+			data_katu[i].draw_canc = false;
+			miss++;
+		}
 	}
 }
 
+void Body::result() {
+	static Font font(40);
+	font(point).draw(600, 150);
+	font(perfect).draw(500,400);
+	font(good).draw(500,500);
+	font(miss).draw(500,600);
+	font(view_achievement).draw(600, 275);
+}

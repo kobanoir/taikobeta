@@ -15,7 +15,7 @@ public:
 
 	void reyout_draw();
 
-	void exe();
+	bool exe();
 
 	void main_exec();
 
@@ -30,6 +30,8 @@ public:
 	void judge_don();
 
 	void judge_katu();
+
+	void result();
 private:
 	/*---------‘åŽ–----------*/
 	Song_data note;
@@ -49,4 +51,11 @@ private:
 	double time_sto;
 	Stopwatch stopwatch;
 	int count;
+	bool game_end;
+
+	double perfect;
+	double good;
+	double miss;
+	double achievement;
+	int view_achievement;
 };
