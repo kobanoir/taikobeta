@@ -17,6 +17,7 @@ bool Body::exe() {
 		miss = 0;
 		achievement = 0;
 		view_achievement = 0;
+		music_reading = 1;
 	}
 	reyout_draw();
 	main_exec();
@@ -161,23 +162,31 @@ void Body::note_draw() {
 
 void Body::play_song() {
 	static Font font(40);
-	string song;
-	song += "Songs\\";
-	song += songtitle;
-	song += "\\";
-	song += note.song;
-	static Sound bgm(Widen(song));
-	static int song_length = bgm.lengthSec();
+	static Sound bgm;
+	static int song_length;
+	if (music_reading == 1) {
+		string song;
+		song += "Songs\\";
+		song += songtitle;
+		song += "\\";
+		song += note.song;
+		music_reading = 0;
+		bgm = Sound(Widen(song));
+		song_length = bgm.lengthSec() + note.music_offset + 1;
+	}
 	if (stopwatch.ms() >= note.music_offset * 1000) {
 		bgm.setVolume(note.velume);
 		bgm.play();
 	}
 	if (song_length == stopwatch.s()) {
+		bgm.stop();
+		stopwatch.reset();
 		game_end = true;
 	}
 	font(perfect).draw(100, 500);
 	font(good).draw(100,600);
 	font(miss).draw(100, 700);
+	font(song_length).draw(300, 150);
 }
 
 void Body::shed_note() {
@@ -319,4 +328,14 @@ void Body::result() {
 	font(good).draw(500,500);
 	font(miss).draw(500,600);
 	font(view_achievement).draw(600, 275);
+}
+
+void Body::release() {
+	//使った動的配列群を開放する
+	data_don.clear();
+	data_katu.clear();
+	note.note.clear();
+	flag = 0;
+	play = 0;
+	music_reading = 1;
 }

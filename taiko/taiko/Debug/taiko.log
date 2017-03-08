@@ -1,2 +1,18 @@
-﻿  taiko.vcxproj -> C:\Users\syken-admin\Desktop\taikobeta\taiko\Debug\taiko.exe
+﻿  Body.cpp
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(125): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(126): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(147): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(154): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(175): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(211): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(215): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(226): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(235): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(258): warning C4244: '=': 'double' から 'int' への変換です。データが失われる可能性があります。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(265): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(271): warning C4389: '!=': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(297): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+c:\users\syken-admin\desktop\taikobeta\taiko\taiko\body.cpp(303): warning C4389: '!=': signed と unsigned の数値を比較しようとしました。
+cl : コマンド ライン warning D9028: 簡易リビルド時のエラーです、通常のビルドに戻します
+  taiko.vcxproj -> C:\Users\syken-admin\Desktop\taikobeta\taiko\Debug\taiko.exe
   taiko.vcxproj -> C:\Users\syken-admin\Desktop\taikobeta\taiko\Debug\taiko.pdb (Full PDB)

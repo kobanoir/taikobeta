@@ -33,7 +33,9 @@ void Game::update() {
 		break;
 	case State::RESULT:
 		exe.result();
-		if (Input::KeySpace.clicked) {
+		if (Input::KeyEnter.clicked) {
+			//ƒƒ‚ƒŠŠJ•ú
+			exe.release();
 			state = State::SONGSELECT;
 		}
 		break;

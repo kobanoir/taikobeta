@@ -27,7 +27,6 @@ public:
 	void draw();
 
 private:
-	//shared_ptr<Music> music;
 	State state;
 	shared_ptr<Title> title;
 	Body exe;

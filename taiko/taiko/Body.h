@@ -32,6 +32,8 @@ public:
 	void judge_katu();
 
 	void result();
+
+	void release();
 private:
 	/*---------‘åŽ–----------*/
 	Song_data note;
@@ -52,6 +54,7 @@ private:
 	Stopwatch stopwatch;
 	int count;
 	bool game_end;
+	bool music_reading;
 
 	double perfect;
 	double good;
