@@ -18,6 +18,8 @@ void Game::update() {
 		}
 		break;
 	case State::SONGSELECT:
+		exe.play_demo(sel.get_title());
+		sel.select_rayout(exe.get_level());
 		if (Input::KeyEnter.clicked) {
 			state = State::GAME;
 			exe.find_note(sel.get_title());
@@ -36,7 +38,7 @@ void Game::update() {
 		if (Input::KeyEnter.clicked) {
 			//ƒƒ‚ƒŠŠJ•ú
 			exe.release();
-			state = State::SONGSELECT;
+			state = State::TYTLE;
 		}
 		break;
 	}
@@ -54,8 +56,6 @@ void Game::draw() {
 		title->draw();
 		break;
 	case State::SONGSELECT:
-		sel.exe();
-		font(L"Šy‹È‘I‘ð").draw(50, 50);
 		break;
 	case State::GAME:
 		Line(0, 240, 1080, 240).draw();

@@ -4,12 +4,9 @@ Song_select::Song_select() {
 	find_files();
 }
 
-void Song_select::exe() {
-	select_rayout();
-}
-
-void Song_select::select_rayout() {
+void Song_select::select_rayout(int def) {
 	static Font font(40);
+	static Font lele(30);
 	static Rect rect(400, 300, 1000, 100);
 	static Rect rect1(500, 180, 1000, 100);
 	static Rect rect2(500, 420, 1000, 100);
@@ -17,6 +14,15 @@ void Song_select::select_rayout() {
 	static Rect rect4(600, 540, 1000, 100);
 	static Rect rect5(700, -50, 1000, 100);
 	static Rect rect6(700, 660, 1000, 100);
+	static Rect level(30, 620, 300, 80);
+	rect.draw(Color(0,0,0,150));
+	rect1.draw(Color(0, 0, 0, 150));
+	rect2.draw(Color(0, 0, 0, 150));
+	rect3.draw(Color(0, 0, 0, 150));
+	rect4.draw(Color(0, 0, 0, 150));
+	rect5.draw(Color(0, 0, 0, 150));
+	rect6.draw(Color(0, 0, 0, 150));
+	level.draw(Palette::Black);
 	rect.drawFrame(3, 0);
 	rect1.drawFrame(3, 0);
 	rect2.drawFrame(3, 0);
@@ -24,6 +30,8 @@ void Song_select::select_rayout() {
 	rect4.drawFrame(3, 0);
 	rect5.drawFrame(3, 0);
 	rect6.drawFrame(3, 0);
+	lele(L"LEVEL:").draw(40, 630);
+	lele(def).draw(230, 630);
 	if (Input::KeyUp.clicked) {
 		if (select == 0) {
 			select = songs_list.size() - 1;

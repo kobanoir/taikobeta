@@ -18,6 +18,7 @@ bool Body::exe() {
 		achievement = 0;
 		view_achievement = 0;
 		music_reading = 1;
+		demo_flag = 0;
 	}
 	reyout_draw();
 	main_exec();
@@ -52,27 +53,27 @@ void Body::find_note(string title) {
 		if (i == 1) {
 			note.song = hoge;
 		}
-		if (i == 2) {
+		if (i == 3) {
 			note.velume = atof(hoge.c_str());
 		}
-		if (i == 3) {
+		if (i == 4) {
 			note.BPM = atof(hoge.c_str());
 		}
-		if (i == 4) {
+		if (i == 5) {
 			note.music_offset = atof(hoge.c_str());
 		}
-		if (i == 5) {
+		if (i == 6) {
 			note.note_offset = atof(hoge.c_str());
 		}
-		if (i == 6) {
+		if (i == 7) {
 			note.songs_constant = atof(hoge.c_str());
 		}
-		if (i == 7) {
+		if (i == 8) {
 			note.songs_def = atoi(hoge.c_str());
 		}
-		if (i >= 8) {
+		if (i >= 9) {
 			note.note.push_back(empty);
-			note.note[i - 8] = hoge;
+			note.note[i - 9] = hoge;
 		}
 		i++;
 	}
@@ -338,4 +339,60 @@ void Body::release() {
 	flag = 0;
 	play = 0;
 	music_reading = 1;
+}
+
+void Body::play_demo(string title) {
+	//画像、音楽、難易度を読み込む
+	//音楽のデモ再生の時間もひつようですね
+	ostringstream img;
+	ostringstream music;
+	static Texture back_img;
+	static Sound demo_music;
+	if (demo_flag == 0) {
+		int i = 0;
+		string fuga;
+		string file = "Songs\\";
+		file += title;
+		file += "\\";
+		file += title;
+		file += ".txt";
+		ifstream ifs(file);
+		for (int i = 0; i <= 8; i++) {
+			getline(ifs, fuga);
+			if (i == 0) {
+				demo.wallpaper = fuga;
+			}
+			if (i == 1) {
+				demo.song = fuga;
+			}
+			if (i == 2) {
+				demo.demo_play = atof(fuga.c_str());
+			}
+			if (i == 8) {
+				demo.songs_def = atoi(fuga.c_str());
+			}
+		}
+		img << "Songs\\" << title << "\\" << demo.wallpaper;
+		music << "Songs\\" << title << "\\" << demo.song;
+		back_img = Texture(Widen(img.str()));
+		demo_music = Sound(Widen(music.str()));
+		demo_music.setPosSec(demo.demo_play);
+		demo_music.play();
+		demo_flag = 1;
+	}
+	back_img.resize(1080, 720).draw();
+	if (demo_music.lengthSec() == demo_music.streamPosSec()) {
+		demo_music.setPosSec(demo.demo_play);
+	}
+	if (Input::KeyUp.clicked) {
+		demo_flag = 0;
+		demo_music.stop();
+	}
+	if (Input::KeyDown.clicked) {
+		demo_flag = 0;
+		demo_music.stop();
+	}
+	if (Input::KeyEnter.clicked) {
+		demo_music.stop();
+	}
 }

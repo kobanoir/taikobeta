@@ -9,6 +9,13 @@ class Song_data;
 class Don;
 class Katu;
 
+struct demo {
+	string wallpaper;
+	string song;
+	int songs_def;
+	double demo_play;
+};
+
 class Body {
 public:
 	void find_note(string title);
@@ -34,11 +41,16 @@ public:
 	void result();
 
 	void release();
+
+	void play_demo(string title);
+
+	int get_level() { return demo.songs_def; }
 private:
 	/*---------‘åŽ–----------*/
 	Song_data note;
 	vector<Don> data_don;
 	vector<Katu> data_katu;
+	demo demo;
 	/*----------‚»‚Ì‘¼--------*/
 	string songtitle;
 	double diff;
@@ -61,4 +73,5 @@ private:
 	double miss;
 	double achievement;
 	int view_achievement;
+	int demo_flag;
 };

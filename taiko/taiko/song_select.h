@@ -8,9 +8,8 @@ class Song_data;
 class Song_select {
 public:
 	Song_select();
-	void exe();
 	void find_files();
-	void select_rayout();
+	void select_rayout(int def);
 	string get_title();
 private:
 	//ファイル走査に使う

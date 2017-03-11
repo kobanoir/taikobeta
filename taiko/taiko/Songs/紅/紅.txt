@@ -1,5 +1,6 @@
-kurenai
+kurenai.jpg
 kurenai.mp3
+0.0
 0.2
 208
 2.0
